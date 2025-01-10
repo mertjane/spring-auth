@@ -1,4 +1,12 @@
 /mvnw text eol=lf
 *.cmd text eol=crlf
 
+# Mark HTML files as non-primary
+*.html linguist-detectable=false
+*.htm linguist-detectable=false
 
+# Mark Java files as primary
+*.java linguist-detectable=true
+
+# Mark resources as non-primary
+src/main/resources/** linguist-detectable=false
