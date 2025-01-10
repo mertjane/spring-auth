@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Verification</title>
+  </head>
+  <body>
+    <!DOCTYPE html>
+    <html xmlns:th="http://www.thymeleaf.org">
+      <head>
+        <meta charset="UTF-8" />
+        <title>Welcome Email</title>
+      </head>
+      <body>
+        <div class="verification-container">
+          <h2>The Web</h2>
+          <br />
+          <p>Enter this temporary verification code to continue:</p>
+          <div class="code-wrapper">{{code}}</div>
+          <p>
+            Please ignore this email if this wasn't you trying to create a Web
+            account.
+          </p>
+          <br />
+          Best,<br />
+          The Web Team
+          <br />
+          <br />
+          <hr />
+          The Web
+        </div>
+      </body>
+    </html>
+  </body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Email Verification</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form id="code-generator-form">
+        <h1>Check your inbox</h1>
+        <p class="code-notify">
+          Enter the verification code we just sent to
+          <span id="user-email"></span>
+        </p>
+        <div class="form-control">
+          <input
+            class="code-input"
+            maxlength="6"
+            type="text"
+            id="code-input"
+            name="code"
+            aria-invalid="true"
+            data-invalid="true"
+            autocomplete="one-time-code"
+          />
+          <label for="code-input" class="code-label">Code</label>
+          <div class="invalid-code-error-message">
+            <img
+              style="position: relative; left: -5px"
+              class="error-icon"
+              src="./assets/error-icon-BaFi8GTB.svg"
+            />The verification code should be exactly 6 characters long.
+          </div>
+        </div>
+        <button id="continue" class="continue-btn" disabled>Continue</button>
+        <div class="alternate-wrapper">
+          <button
+            class="transparent-btn"
+            type="button"
+            name="intent"
+            value="generate"
+          >
+            Resend email
+          </button>
+        </div>
+      </form>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const verificationForm = document.getElementById("code-generator-form");
+        const userEmail = sessionStorage.getItem("email");
+        const codeLabel = document.querySelector(".code-label");
+        const codeInput = document.getElementById("code-input");
+        const continueButton = document.getElementById("continue");
+        const reSendEmailButton = document.querySelector(".transparent-btn");
+        const invalidCodeErrorMessage = document.querySelector(
+          ".invalid-code-error-message"
+        );
+        document.getElementById("user-email").textContent = userEmail;
+
+        // Add an event listener to the password input
+        codeInput.addEventListener("input", function () {
+          const code = codeInput.value.trim();
+
+          if (code) {
+            invalidCodeErrorMessage.classList.add("visible");
+            codeInput.classList.add("error");
+            codeLabel.classList.add("filled");
+            continueButton.disabled = false;
+          } else {
+            invalidCodeErrorMessage.classList.remove("visible");
+            codeInput.classList.remove("error");
+            codeLabel.classList.remove("filled");
+            continueButton.disabled = true;
+          }
+
+          if (code.length >= 6) {
+            invalidCodeErrorMessage.classList.remove("visible");
+            codeInput.classList.remove("error");
+            codeLabel.classList.add("filled");
+            continueButton.disabled = false;
+          }
+        });
+
+        verificationForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          continueButton.style.cursor = "not-allowed";
+          const code = codeInput.value.trim();
+
+          // Get the userId from sessionStorage
+          const userId = sessionStorage.getItem("userId");
+
+          // Send a PUT req to verify the OTP
+          fetch(
+            `http://localhost:8080/api/v1/authorize/email-verification/${userId}/${code}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          )
+            .then((res) => {
+              if (!res.ok) {
+                throw new Error("Verification failed: " + res.statusText);
+              }
+              return res.text();
+            })
+            .then((message) => {
+              console.log("Success:", message);
+
+              // Redirect to another page (e.g., login or dashboard) after a delay
+              setTimeout(() => {
+                window.location.href = "about-you.html"; // Replace with your desired redirect URL
+              }, 2000); // Redirect after 2 seconds
+            })
+            .catch((error) => {
+              console.log(error.message);
+            });
+        });
+
+        reSendEmailButton.addEventListener("click", function () {
+          const url =
+            "http://localhost:8080/api/v1/authorize/email-verification";
+
+          fetch(url, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => {
+              if (res.ok) {
+                console.log("Email sent again." + res.statusText);
+              } else {
+                throw new Error("Error: " + res.status);
+              }
+            })
+            .catch((error) => {
+              console.log(error.message);
+            });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,758 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Söhne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container h1 {
+  margin: 32px 0;
+  font-size: 32px;
+  color: #2d333a;
+}
+
+.container form {
+  background-color: #fff;
+  padding: 0 40px 40px;
+  border-radius: 3px;
+  box-shadow: none;
+  width: 320px;
+  box-sizing: content-box;
+  flex-shrink: 0;
+}
+
+form .form-control {
+  position: relative;
+  margin-bottom: 25px;
+  width: 320px;
+  box-sizing: content-box;
+}
+
+.form-control .email-input {
+  appearance: none;
+  background-color: #fff;
+  border: 1px solid #c2c8d0;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #2d333a;
+  font-family: inherit;
+  font-size: 16px;
+  height: 52px;
+  line-height: 1.1;
+  outline: none;
+  padding-block: 1px;
+  padding-inline: 2px;
+  padding: 0 16px;
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  width: 100%;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  margin: 0;
+}
+
+.container #code-generator-form {
+  margin-top: -250px;
+}
+
+#code-generator-form h1 {
+  text-align: center;
+  font-weight: 400;
+  margin: 10px;
+}
+
+#about-you-form h1 {
+  text-align: center;
+  font-weight: 400;
+  margin: 10px;
+}
+
+#about-you-form {
+  margin-top: -100px;
+}
+
+#about-you-form .form-control {
+  margin: 0;
+}
+
+#about-you-form .term-info {
+  text-wrap: pretty;
+  text-align: center;
+  font-size: 14.3px;
+  margin-top: 18px;
+  padding: 0 4px;
+  color: #5d5d5d;
+}
+
+.form-control .code-input {
+  appearance: none;
+  background-color: #fff;
+  border: 1px solid #c2c8d0;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #2d333a;
+  font-family: inherit;
+  font-size: 16px;
+  height: 52px;
+  line-height: 1.1;
+  outline: none;
+  padding-block: 1px;
+  padding-inline: 2px;
+  padding: 0 16px;
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  width: 100%;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  margin: 0;
+}
+
+.code-notify {
+  color: #5d5d5d;
+  font-size: 17px;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.form-control .password-input {
+  appearance: none;
+  background-color: #fff;
+  border: 1px solid #686868;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #2d333a;
+  font-family: inherit;
+  font-size: 16px;
+  height: 52px;
+  line-height: 1.1;
+  outline: none;
+  padding-block: 1px;
+  padding-inline: 2px;
+  padding: 0 40px 0 16px;
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  width: 100%;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  margin-top: 18px;
+}
+
+.form-control .fName-input {
+  appearance: none;
+  background-color: #fff;
+  border: 1px solid #c2c8d0;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #2d333a;
+  font-family: inherit;
+  font-size: 16px;
+  height: 52px;
+  line-height: 1.1;
+  outline: none;
+  padding-block: 1px;
+  padding-inline: 2px;
+  padding: 0 40px 0 16px;
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  width: 100%;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  margin-top: 18px;
+}
+
+.form-control .date-input {
+  appearance: none;
+  background-color: #fff;
+  border: 1px solid #c2c8d0;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #2d333a;
+  font-family: inherit;
+  font-size: 16px;
+  height: 52px;
+  line-height: 1.1;
+  outline: none;
+  padding-block: 1px;
+  padding-inline: 2px;
+  padding: 0 40px 0 16px;
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  width: 100%;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  margin-top: 18px;
+}
+
+/* Hide the native date picker dropdown */
+.date-input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* Hide the native date picker dropdown in Firefox */
+.date-input[type="date"] {
+  -moz-appearance: textfield;
+}
+
+.date-input::-webkit-datetime-edit {
+  color: #fff;
+}
+
+.date-input.filled::-webkit-datetime-edit {
+  color: black; /* Change the text color to black */
+}
+
+
+
+.form-control .date-input:focus::-webkit-datetime-edit {
+  color: #000;
+  font-size: 18px;
+  
+}
+
+.date-input::-webkit-datetime-edit-year-field,
+.date-input::-webkit-datetime-edit-month-field,
+.date-input::-webkit-datetime-edit-day-field {
+  text-transform: uppercase;
+}
+
+.form-control .date-input::-webkit-datetime-edit-year-field:focus,
+.form-control .date-input::-webkit-datetime-edit-month-field:focus,
+.form-control .date-input::-webkit-datetime-edit-day-field:focus {
+  background-color: #10a37f;
+  color: #fff;
+}
+
+.show-password-toggle {
+  position: absolute;
+  top: 64%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 18px; /* Set the width of the button */
+  height: 18px; /* Set the height of the button */
+  background-image: url("../assets/show-tooltip.svg"); /* Initial icon */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.show-password-toggle:focus {
+  outline: none; /* Remove the default focus outline */
+}
+
+.form-control #email-input:disabled {
+  background-color: #f1f2f4;
+  border: 1px solid #686868;
+  color: #000 !important;
+}
+
+.form-control .email-input.error,
+.form-control .password-input.error,
+.form-control .code-input.error,
+.form-control .fName-input.error,
+.form-control .date-input.error {
+  border: 1px solid #d00e17 !important;
+}
+
+.form-control .email-input:focus,
+.email-input:valid,
+.form-control .password-input:focus,
+.password-input:valid,
+.form-control .code-input:focus,
+.code-input:valid {
+  border: 1px solid #10a37f;
+  outline: none;
+}
+
+.form-control .date-input:focus,
+.date-input:valid {
+  border: 1px solid #10a37f;
+  outline: none;
+}
+
+.form-control .email-input:focus + .email-label {
+  font-size: 14px;
+  top: 0;
+  left: 10px;
+  color: #10a37f;
+  background-color: #fff;
+}
+
+.form-control .password-input:focus + .password-label {
+  font-size: 14px;
+  top: 18px;
+  left: 10px;
+  color: #10a37f;
+  background-color: #fff;
+}
+
+.form-control .code-input:focus + .code-label {
+  font-size: 14px;
+  top: 0;
+  left: 10px;
+  color: #10a37f;
+  background-color: #fff;
+}
+
+.form-control .fName-input:focus + .fName-label {
+  font-size: 14px;
+  top: 18px;
+  left: 10px;
+  color: #10a37f;
+  background-color: #fff;
+}
+
+.form-control .date-input:focus + .date-label {
+  font-size: 14px;
+  top: 18px;
+  left: 10px;
+  color: #10a37f;
+  background-color: #fff;
+}
+
+.form-control .email-input.error + .email-label,
+.form-control .password-input.error + .password-label,
+.form-control .code-input.error + .code-label,
+.form-control .fName-input.error + .fName-label,
+.form-control .date-input.error + .date-label {
+  color: #d00e17;
+}
+
+.form-control .email-label {
+  position: absolute;
+  top: 26px;
+  left: 16px;
+  background-color: #fff;
+  color: #6f7780;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  max-width: 90%;
+  overflow: hidden;
+  pointer-events: none;
+  padding: 1px 6px;
+  text-overflow: ellipsis;
+  transform: translateY(-50%);
+  transform-origin: 0;
+  transition: transform 0.15s ease-in-out, top 0.15s ease-in-out,
+    padding 0.15s ease-in-out;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.form-control .code-label {
+  position: absolute;
+  top: 26px;
+  left: 16px;
+  background-color: #fff;
+  color: #b4b4b4;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  max-width: 90%;
+  overflow: hidden;
+  pointer-events: none;
+  padding: 1px 6px;
+  text-overflow: ellipsis;
+  transform: translateY(-50%);
+  transform-origin: 0;
+  transition: transform 0.15s ease-in-out, top 0.15s ease-in-out,
+    padding 0.15s ease-in-out;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.form-control .password-label {
+  position: absolute;
+  top: 42px;
+  left: 16px;
+  background-color: #fff;
+  color: #6f7780;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  max-width: 90%;
+  overflow: hidden;
+  pointer-events: none;
+  padding: 1px 6px;
+  text-overflow: ellipsis;
+  transform: translateY(-50%);
+  transform-origin: 0;
+  transition: transform 0.15s ease-in-out, top 0.15s ease-in-out,
+    padding 0.15s ease-in-out;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.form-control .fName-label {
+  position: absolute;
+  top: 43px;
+  left: 16px;
+  background-color: #fff;
+  color: #b4b4b4;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  max-width: 90%;
+  overflow: hidden;
+  pointer-events: none;
+  padding: 1px 6px;
+  text-overflow: ellipsis;
+  transform: translateY(-50%);
+  transform-origin: 0;
+  transition: transform 0.15s ease-in-out, top 0.15s ease-in-out,
+    padding 0.15s ease-in-out;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.form-control .date-label {
+  position: absolute;
+  top: 43px;
+  left: 16px;
+  background-color: #fff;
+  color: #b4b4b4;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  max-width: 90%;
+  overflow: hidden;
+  pointer-events: none;
+  padding: 1px 6px;
+  text-overflow: ellipsis;
+  transform: translateY(-50%);
+  transform-origin: 0;
+  transition: transform 0.15s ease-in-out, top 0.15s ease-in-out,
+    padding 0.15s ease-in-out;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.email-label.filled {
+  font-size: 14px;
+  top: 0;
+  left: 10px;
+}
+
+.password-label.filled {
+  font-size: 14px;
+  top: 18px;
+  left: 10px;
+}
+
+.code-label.filled {
+  font-size: 14px;
+  top: 0;
+  left: 10px;
+}
+
+.fName-label.filled {
+  font-size: 14px;
+  top: 18px;
+  left: 10px;
+}
+
+.date-label.filled {
+  font-size: 14px;
+  top: 18px;
+  left: 10px;
+}
+
+.form-control .invalid-email-error-message {
+  color: #d00e17;
+  display: none;
+  margin: 4px 0 12px;
+  font-size: 12px;
+}
+
+.form-control .invalid-code-error-message {
+  color: #d00e17;
+  display: none;
+  margin: 4px 0 12px;
+  font-size: 12px;
+}
+
+.form-control .invalid-fName-error-message, 
+.form-control .invalid-dob-error-message {
+  color: #d00e17;
+  display: none;
+  margin: 4px 0 12px;
+  font-size: 12px;
+}
+
+@keyframes popOverIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.form-control .invalid-password-error-message {
+  position: relative;
+  display: none;
+  padding: 10px 16px;
+  border: 1px solid #c2c8d0;
+  margin-top: 10px;
+  border-radius: 3px;
+  text-align: left;
+  line-height: 20px;
+  -webkit-animation: popOverIn 0.5s ease-in-out 1 forwards;
+  animation: popOverIn 0.5s ease-in-out 1 forwards;
+}
+
+/* Default list style */
+.invalid-password-error-message ul {
+  list-style: none;
+  padding-left: 0;
+  font-weight: 500;
+  font-size: 14px;
+  color: #2d333a;
+}
+
+.invalid-password-error-message #pwd-validation {
+  position: relative;
+  margin: 10px 0;
+  padding-left: 18px;
+}
+
+/* Default bullet (before validation) */
+.invalid-password-error-message #pwd-validation::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #000;
+}
+
+/* Success icon (when password is valid) */
+.invalid-password-error-message #pwd-validation.valid::before {
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: green;
+}
+
+.invalid-password-error-message #pwd-validation.valid {
+  color: green;
+}
+
+.form-control .invalid-email-error-message.visible {
+  display: flex;
+}
+
+.form-control .invalid-password-error-message.visible {
+  display: flex;
+}
+
+.form-control .invalid-fName-error-message.visible {
+  display: flex;
+}
+
+.form-control .invalid-dob-error-message.visible {
+  display: flex;
+}
+
+#user-email {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px 0 32px 0;
+}
+
+.form-control .invalid-code-error-message.visible {
+  display: flex;
+}
+
+form .continue-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 52px;
+  width: 320px;
+  background-color: #10a37f;
+  color: #fff;
+  margin: 24px 0 0;
+  border-radius: 6px;
+  padding: 4px 16px;
+  font-size: 16.3px;
+  border-width: 0;
+  cursor: pointer;
+}
+
+#code-generator-form .transparent-btn {
+  background-color: transparent;
+  color: #000;
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+  width: fit-content;
+  border: none;
+  outline: none;
+  font-size: 17px;
+  margin-top: 10px;
+  cursor: pointer;
+  letter-spacing: -0.2px;
+}
+
+.alternate-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.alternate-wrapper .go-back-btn {
+  border: 0;
+  padding: 10px;
+  line-height: 18px;
+  display: inline;
+  cursor: pointer;
+  vertical-align: middle;
+  font-size: inherit;
+  color: #10a37f;
+  background-color: transparent;
+  font-weight: 600;
+}
+
+.continue-btn:hover {
+  box-shadow: inset 0 0 0 150px #0000001a;
+}
+
+form .other-page {
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: 0;
+  font-size: 14.5px;
+  color: #000000;
+  font-weight: 400;
+  width: 320px;
+}
+
+.other-page-link {
+  padding: 4px;
+}
+
+a {
+  font-weight: 400;
+  text-decoration: inherit;
+  color: #10a37f;
+}
+
+.divider-wrapper {
+  display: flex;
+  flex-direction: row;
+  text-transform: uppercase;
+  border: none;
+  font-size: 12px;
+  font-weight: 400;
+  margin: 0;
+  padding: 24px 0 0;
+  align-items: center;
+  justify-content: center;
+  width: 320px;
+  vertical-align: baseline;
+}
+
+.divider {
+  text-align: center;
+  flex: 0.2 0 auto;
+  margin: 0;
+  height: 12px;
+}
+
+.divider-wrapper:before,
+.divider-wrapper:after {
+  content: "";
+  border-bottom: 1px solid #c2c8d0;
+  flex: 1 0 auto;
+  height: 0.5em;
+  margin: 0;
+}
+
+form .social-section {
+  margin-top: 24px;
+}
+
+.social-section .social-btn {
+  padding: 0 8px 0 52px;
+  position: relative;
+  width: 320px;
+  border: 1px solid #c2c8d0;
+  border-radius: 6px;
+  font-size: 16px;
+  align-items: center;
+  background-color: #fff;
+  height: 52px;
+  transition: box-shadow 0.15 ease-in-out, background-color 0.15s ease-in-out;
+  cursor: pointer;
+  color: #2d333a;
+  margin-bottom: 8px;
+  display: flex;
+  outline: 0;
+}
+
+.social-btn:hover {
+  box-shadow: inset 0 0 0 150px #0000001a;
+}
+
+.social-btn .social-logo-wrapper {
+  position: absolute;
+  left: 26px;
+  top: 50%;
+  transform: translate(-50%) translateY(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.social-logo-wrapper .social-logo {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+.social-btn .social-text {
+  text-align: left;
+  position: relative;
+}

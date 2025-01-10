@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup Password Page</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Create your account</h1>
+      <form id="signup-pwd-form">
+        <!-- Hidden input to store the email -->
+        <div class="form-control">
+          <input
+            class="email-input"
+            type="text"
+            id="email-input"
+            name="email"
+            autocomplete="username"
+            disabled
+          />
+          <div class="password-wrapper">
+            <input
+              class="password-input"
+              type="password"
+              id="password-input"
+              name="password"
+              placeholder=""
+              required
+            />
+            <label class="password-label" for="password-input">Password*</label>
+            <button
+              type="button"
+              class="show-password-toggle"
+              aria-label="Show password"
+            ></button>
+          </div>
+          <div class="invalid-password-error-message">
+            <ul>
+              Your password must contain:
+              <li id="pwd-validation">At least 12 characters</li>
+            </ul>
+          </div>
+        </div>
+
+        <button type="submit" class="continue-btn" disabled>Continue</button>
+        <div class="alternate-wrapper">
+          <button
+            type="button"
+            aria-label=""
+            value="back-action"
+            class="go-back-btn"
+          >
+            Go back
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const userEmail = sessionStorage.getItem("email");
+        const passwordInput = document.getElementById("password-input");
+        const passwordLabel = document.querySelector(".password-label");
+        const showPasswordToggle = document.querySelector(
+          ".show-password-toggle"
+        );
+        const continueButton = document.querySelector(".continue-btn");
+        const goBackButton = document.querySelector(".go-back-btn");
+        const invalidPasswordErrorMessage = document.querySelector(
+          ".invalid-password-error-message"
+        );
+        const signUpForm = document.getElementById("signup-pwd-form");
+
+        // Set the email input value
+        if (userEmail) {
+          document.getElementById("email-input").value = userEmail;
+        } else {
+          window.location.href = "auth.html";
+        }
+
+        // Function to validate password
+        function validatePassword(password) {
+          const passwordRegex = /^.{12,}$/;
+          return passwordRegex.test(password);
+        }
+
+        // Add an event listener to the password input
+        passwordInput.addEventListener("input", function () {
+          const password = passwordInput.value.trim();
+
+          if (password) {
+            passwordLabel.classList.add("filled");
+            invalidPasswordErrorMessage.classList.add("visible");
+            continueButton.disabled = false;
+          } else {
+            passwordLabel.classList.remove("filled");
+            continueButton.disabled = true;
+          }
+
+          const validInput = document.getElementById("pwd-validation");
+
+          if (validatePassword(password)) {
+            validInput.classList.add("valid"); // Add the "valid" class
+          } else {
+            validInput.classList.remove("valid"); // Remove the "valid" class
+          }
+        });
+
+        // Add an event listener to the show password toggle button
+        showPasswordToggle.addEventListener("click", function () {
+          if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            showPasswordToggle.style.backgroundImage =
+              "url('../assets/hide-tooltip.svg')";
+          } else {
+            passwordInput.type = "password";
+            showPasswordToggle.style.backgroundImage =
+              "url('../assets/show-tooltip.svg')";
+          }
+        });
+
+        // Add an event listener to the form submission
+        signUpForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          continueButton.style.cursor = "not-allowed";
+          const password = passwordInput.value.trim();
+          const userEmail = sessionStorage.getItem("email");
+
+          if (!validatePassword(password)) {
+            invalidPasswordErrorMessage.classList.add("visible");
+            passwordInput.classList.add("error");
+            return;
+          }
+
+          const userData = {
+            email: userEmail,
+            pwd: password,
+          };
+
+          // send a POST request to the server
+          fetch("http://localhost:8080/api/v1/authorize/signup", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userData),
+          })
+            .then((res) => {
+              if (!res.ok) {
+                throw new Error("Error: " + res.status);
+              }
+              return res.json();
+            })
+            .then((data) => {
+              console.log("Success:", data);
+
+              // Store the userId in sessionStorage
+              sessionStorage.setItem("userId", data.userId);
+
+              // Send a GET request to the server to send the verification email
+              return fetch(
+                `http://localhost:8080/api/v1/authorize/email-verification?email=${userEmail}`,
+                {
+                  method: "GET",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                }
+              );
+            })
+            .then((emailRes) => {
+              if (!emailRes.ok) {
+                throw new Error(
+                  "Error sending verification email: " + emailRes.status
+                );
+              }
+              return emailRes.text();
+            })
+            .then((emailMessage) => {
+              console.log("Email sent successfully.");
+
+              // Redirect to the email verification page
+              window.location.href = "emailVerify.html";
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        });
+
+        goBackButton.addEventListener("click", function () {
+          window.location.href = "auth.html";
+        });
+      });
+    </script>
+  </body>
+</html>

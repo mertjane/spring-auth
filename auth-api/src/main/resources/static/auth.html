@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup Page</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Create your account</h1>
+      <form id="auth-form" action="/submit" method="POST">
+        <div class="form-control">
+          <input
+            class="email-input"
+            type="text"
+            id="email-input"
+            name="email"
+            autocomplete="username"
+            autocapitalize="none"
+            spellcheck="false"
+            placeholder=""
+            required
+          />
+          <label class="email-label" for="email-input">Email address*</label>
+          <div class="invalid-email-error-message">
+            <img
+              class="error-icon"
+              src="../assets/error-icon-BaFi8GTB.svg"
+            />Email is not valid.
+          </div>
+        </div>
+
+        <button id="continue" class="continue-btn" disabled>Continue</button>
+        <p class="other-page">
+          Already have an account?
+          <a class="other-page-link" href="http://localhost:8080/login.html"
+            >Login</a
+          >
+        </p>
+        <div class="divider-wrapper"><span class="divider">Or</span></div>
+        <div class="social-section">
+          <button class="social-btn">
+            <span class="social-logo-wrapper"
+              ><img
+                class="social-logo"
+                src="../assets/google-logo-NePEveMl.svg"
+                alt="Google logo" /></span
+            ><span class="social-text">Continue with Google</span></button
+          ><button class="social-btn">
+            <span class="social-logo-wrapper"
+              ><img
+                class="social-logo"
+                src="../assets/microsoft-logo-BUXxQnXH.svg"
+                alt="Microsoft logo" /></span
+            ><span class="social-text"
+              >Continue with Microsoft Account</span
+            ></button
+          ><button class="social-btn">
+            <span class="social-logo-wrapper"
+              ><img
+                class="social-logo"
+                src="../assets/apple-logo-vertical-full-bleed-tAoxPOUx.svg"
+                alt="Apple logo" /></span
+            ><span class="social-text">Continue with Apple</span>
+          </button>
+        </div>
+      </form>
+    </div>
+    <script src="./js/auth.js"></script>
+  </body>
+</html>

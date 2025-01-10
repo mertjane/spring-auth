@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About You</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form id="about-you-form">
+        <h1>Tell us about you</h1>
+        <div class="form-control">
+          <input
+            type="text"
+            class="fName-input"
+            id="fName-input"
+            name="fName"
+            required
+          />
+          <label for="fName-input" class="fName-label">Full name</label>
+          <div class="invalid-fName-error-message">
+            <img
+              style="padding-right: 4px"
+              class="error-icon"
+              src="./assets/error-icon-BaFi8GTB.svg"
+            />Hmm, that doesn't look right. Try again?
+          </div>
+        </div>
+        <div class="form-control">
+          <input
+            type="date"
+            class="date-input"
+            id="date-input"
+            name="date"
+            required
+            min="1895-01-01"
+            max="2025-01-01"
+          />
+          <label for="date-input" class="date-label">Birthday</label>
+          <div class="invalid-dob-error-message">
+            <img
+              class="error-icon"
+              style="padding-right: 4px"
+              src="./assets/error-icon-BaFi8GTB.svg"
+            />Hmm, that doesn't look right. Try again?
+          </div>
+        </div>
+        <p class="term-info">
+          By clicking "Continue", you agree to our <u>Terms</u> and have read
+          our <u>Privacy Policy</u>.
+        </p>
+        <button id="continue" class="continue-btn" disabled>Continue</button>
+      </form>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const aboutForm = document.getElementById("about-you-form");
+        const userId = sessionStorage.getItem("userId");
+        const fNameInput = document.getElementById("fName-input");
+        const dobInput = document.getElementById("date-input");
+        const fNameLabel = document.querySelector(".fName-label");
+        const dobLabel = document.querySelector(".date-label");
+        const continueButton = document.getElementById("continue");
+        const invalidFNameErrorMessage = document.querySelector(
+          ".invalid-fName-error-message"
+        );
+        const invalidDobErrorMessage = document.querySelector(
+          ".invalid-dob-error-message"
+        );
+
+        const dobValue = formatDateAsMMDDYYYY(dobInput.value);
+
+        function formatDateAsMMDDYYYY(dateString) {
+          const date = new Date(dateString);
+          const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+          const day = String(date.getDate()).padStart(2, "0");
+          const year = date.getFullYear();
+          return `${month}-${day}-${year}`; // Format as MM-DD-YYYY
+        }
+
+        // Add an event listener to the full name input
+        fNameInput.addEventListener("input", function () {
+          const fName = fNameInput.value.trim();
+
+          const numRegex = /[0-9]/;
+
+          if (fName) {
+            fNameLabel.classList.add("filled");
+          } else {
+            fNameLabel.classList.remove("filled");
+          }
+
+          if (numRegex.test(fName)) {
+            invalidFNameErrorMessage.classList.add("visible");
+            fNameInput.classList.add("error");
+            continueButton.disabled = true;
+          } else {
+            invalidFNameErrorMessage.classList.remove("visible");
+            fNameInput.classList.remove("error");
+            continueButton.disabled = false;
+          }
+        });
+
+        // Add an event listener to the date of birth input
+        dobInput.addEventListener("input", function () {
+          const dob = dobInput.value.trim();
+          const selectedDate = new Date(dobInput.value);
+          const selectedYear = selectedDate.getFullYear();
+
+          console.log(dob);
+
+          const minYear = 1895;
+          const maxYear = 2025;
+
+          if (dob) {
+            dobLabel.classList.add("filled");
+            dobInput.classList.add("filled");
+          } else {
+            dobLabel.classList.remove("filled");
+            dobInput.classList.remove("filled");
+          }
+
+          if (selectedYear < minYear || selectedYear > maxYear) {
+            // Show error message and add error styling
+            invalidDobErrorMessage.classList.add("visible");
+
+            dobInput.classList.add("error");
+            continueButton.disabled = true;
+          } else {
+            // Hide error message and remove error styling
+            invalidDobErrorMessage.classList.remove("visible");
+
+            dobInput.classList.remove("error");
+            continueButton.disabled = false;
+          }
+        });
+
+        // Add an event listener to the form
+        aboutForm.addEventListener("submit", function (e) {
+          continueButton.style.cursor = "not-allowed";
+          e.preventDefault();
+
+          url = `http://localhost:8080/api/v1/authorize/update-user/${userId}`;
+
+          // Format the date as YYYY-MM-DD
+          const dobValue = formatDateAsMMDDYYYY(dobInput.value);
+
+          console.log(dobValue);
+
+          fetch(url, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              fullName: fNameInput.value,
+              dob: dobValue,
+            }),
+          })
+            .then((res) => {
+              if (res.ok) {
+                console.log("User updated successfully.");
+                alert("User updated successfully.");
+                // Optionally, redirect the user or perform other actions
+                // window.location.href = "/next-page.html";
+              } else {
+                return res.json().then((data) => {
+                  throw new Error(data.message || "Failed to update user.");
+                });
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              alert(error.message || "An error occurred. Please try again.");
+            });
+        });
+      });
+    </script>
+  </body>
+</html>
