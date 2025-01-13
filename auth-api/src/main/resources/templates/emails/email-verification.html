@@ -11,23 +11,54 @@
       <head>
         <meta charset="UTF-8" />
         <title>Welcome Email</title>
+        <style>
+          .verification-container {
+            margin: 0 auto;
+            padding: 20px;
+            width: 400px;
+            font-family: Arial, sans-serif;
+          }
+
+          .code-wrapper {
+            display: inline-block;
+            padding: 18px 20px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            font-size: 20px;
+            font-weight: bold;
+            width: 100%;
+          }
+
+          .footer {
+            font-size: 14px;
+            opacity: 0.7;
+          }
+
+          hr {
+            border: 0;
+            height: 1px;
+            background: #f0f0f0;
+          }
+        </style>
       </head>
       <body>
         <div class="verification-container">
           <h2>The Web</h2>
-          <br />
           <p>Enter this temporary verification code to continue:</p>
-          <div class="code-wrapper">{{code}}</div>
+          <div class="code-wrapper" th:text="${code}"></div>
           <p>
             Please ignore this email if this wasn't you trying to create a Web
             account.
           </p>
           <br />
-          Best,<br />
-          The Web Team
+          <p class="footer">
+            Best,<br />
+            The Web Team
+          </p>
           <br />
-          <br />
+
           <hr />
+          <br />
           The Web
         </div>
       </body>

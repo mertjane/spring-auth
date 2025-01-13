@@ -281,10 +281,41 @@ form .form-control {
 }
 
 .form-control #email-input:disabled {
-  background-color: #f1f2f4;
+  background-color: #ffff;
   border: 1px solid #686868;
   color: #000 !important;
 }
+
+.input-container {
+  position: relative;
+  width: 100%; /* Adjust width as needed */
+  max-width: 400px; /* Adjust max-width as needed */
+}
+
+.email-input {
+  width: 100%;
+  padding: 10px 40px 10px 10px; /* Add padding on the right for the button */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.edit-button {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #10a37f; /* Blue color for the Edit button */
+  font-size: 16.5px;
+  cursor: pointer;
+  padding: 14px;
+  font-weight: 400;
+}
+
+
 
 .form-control .email-input.error,
 .form-control .password-input.error,
@@ -505,6 +536,13 @@ form .form-control {
   font-size: 12px;
 }
 
+.form-control .invalid-credentials-error-message {
+  color: #d00e17;
+  display: none;
+  margin: 4px 0 12px;
+  font-size: 12px;
+}
+
 .form-control .invalid-code-error-message {
   color: #d00e17;
   display: none;
@@ -590,6 +628,10 @@ form .form-control {
 }
 
 .form-control .invalid-dob-error-message.visible {
+  display: flex;
+}
+
+.form-control .invalid-credentials-error-message.visible {
   display: flex;
 }
 

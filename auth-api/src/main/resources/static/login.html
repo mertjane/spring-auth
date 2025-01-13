@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Welcome back</h1>
+      <form id="login-form">
+        <div class="form-control">
+          <input
+            type="text"
+            class="email-input"
+            id="email-input"
+            name="email"
+            autocomplete="username"
+            autocapitalize="none"
+            spellcheck="false"
+            placeholder=""
+            required
+          />
+          <label class="email-label" for="email-input">Email address*</label>
+          <div class="invalid-email-error-message">
+            <img
+              class="error-icon"
+              style="margin-right: 4px"
+              src="../assets/error-icon-BaFi8GTB.svg"
+            />Email is not valid.
+          </div>
+        </div>
+        <button id="continue" class="continue-btn" disabled>Continue</button>
+        <p class="other-page">
+          Don't have an account?
+          <a class="other-page-link" href="http://localhost:8080/auth.html"
+            >Sign Up</a
+          >
+        </p>
+
+        <div class="divider-wrapper"><span class="divider">Or</span></div>
+        <div class="social-section">
+          <button class="social-btn">
+            <span class="social-logo-wrapper"
+              ><img
+                class="social-logo"
+                src="../assets/google-logo-NePEveMl.svg"
+                alt="Google logo" /></span
+            ><span class="social-text">Continue with Google</span></button
+          ><button class="social-btn">
+            <span class="social-logo-wrapper"
+              ><img
+                class="social-logo"
+                src="../assets/microsoft-logo-BUXxQnXH.svg"
+                alt="Microsoft logo" /></span
+            ><span class="social-text"
+              >Continue with Microsoft Account</span
+            ></button
+          ><button class="social-btn">
+            <span class="social-logo-wrapper"
+              ><img
+                class="social-logo"
+                src="../assets/apple-logo-vertical-full-bleed-tAoxPOUx.svg"
+                alt="Apple logo" /></span
+            ><span class="social-text">Continue with Apple</span>
+          </button>
+        </div>
+      </form>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const emailInput = document.getElementById("email-input");
+        const nextPageBtn = document.querySelector(".continue-btn");
+        const emailLabel = document.querySelector(".email-label");
+        const loginForm = document.getElementById("login-form");
+        const formError = document.querySelector(
+          ".invalid-email-error-message"
+        );
+
+        // Function to validate email
+        function validateEmail(email) {
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return emailRegex.test(email);
+        }
+
+        // Update email input label when input changes
+        emailInput.addEventListener("input", function () {
+          const email = emailInput.value.trim();
+
+          if (email) {
+            emailLabel.classList.add("filled");
+            nextPageBtn.disabled = false;
+          } else {
+            emailLabel.classList.remove("filled");
+            nextPageBtn.disabled = true;
+          }
+
+          // Remove error class and hide error message when the user starts typing again
+          emailInput.classList.remove("error");
+          formError.classList.remove("visible");
+        });
+
+        loginForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const email = emailInput.value.trim();
+
+          if (!validateEmail(email)) {
+            emailInput.classList.add("error"); // Add error class to email input
+            formError.classList.add("visible"); // Show error message
+          } else {
+            emailInput.classList.remove("error"); // Remove error class
+            formError.classList.remove("visible"); // Hide error message
+
+            // Set the email to session storage
+            sessionStorage.setItem("email", email);
+
+            // Redirect to the next page
+            window.location.href = "login-password.html";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
