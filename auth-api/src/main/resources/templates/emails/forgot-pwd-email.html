@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reset Password</title>
+    <style>
+      .container {
+        margin: 0 auto;
+        padding: 20px;
+        width: 520px;
+        font-family: Arial, sans-serif;
+      }
+      h1 {
+        color: #2d333a;
+      }
+
+      p {
+        font-size: 13px;
+        line-height: 140%;
+      }
+
+      .wrapper{
+        position: relative;
+        box-sizing: border-box;
+        padding: 12px 0;
+        display: flex;
+        width: max-content;
+      }
+      .wrapper .reset-link {
+        padding: 16px 24px;
+        background-color: #10a37f;
+        font-size: 16px;
+        color: #fff;
+        font-weight: 500;
+        border-radius: 4px;
+        text-decoration: none;
+
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Reset password</h1>
+      <p>
+        A password change has been requested for your account. If this was you,
+        please use the link below to reset your password.
+      </p>
+
+      <!-- Password Reset Link -->
+      <div class="wrapper">
+        <a class="reset-link" th:href="${link}">Reset password</a>
+      </div>
+    </div>
+  </body>
+</html>

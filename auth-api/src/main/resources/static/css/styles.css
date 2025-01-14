@@ -66,6 +66,34 @@ form .form-control {
   margin: 0;
 }
 
+.form-control .re-password-input {
+  appearance: none;
+  background-color: #fff;
+  border: 1px solid #c2c8d0;
+  border-radius: 6px;
+  box-sizing: border-box;
+  color: #2d333a;
+  font-family: inherit;
+  font-size: 16px;
+  height: 52px;
+  line-height: 1.1;
+  outline: none;
+  padding-block: 1px;
+  padding-inline: 2px;
+  padding: 0 16px;
+  transition: box-shadow 0.2s ease-in-out, border-color 0.2s ease-in-out;
+  width: 100%;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  margin: 0;
+}
+
 .container #code-generator-form {
   margin-top: -250px;
 }
@@ -238,12 +266,9 @@ form .form-control {
   color: black; /* Change the text color to black */
 }
 
-
-
 .form-control .date-input:focus::-webkit-datetime-edit {
   color: #000;
   font-size: 18px;
-  
 }
 
 .date-input::-webkit-datetime-edit-year-field,
@@ -263,6 +288,40 @@ form .form-control {
   position: absolute;
   top: 64%;
   right: 10px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 18px; /* Set the width of the button */
+  height: 18px; /* Set the height of the button */
+  background-image: url("../assets/show-tooltip.svg"); /* Initial icon */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.form-control .show-password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 18px; /* Set the width of the button */
+  height: 18px; /* Set the height of the button */
+  background-image: url("../assets/show-tooltip.svg"); /* Initial icon */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.form-control:nth-child(1) .show-password-toggle {
+  position: absolute;
+  top: 64%;
+  right: 20px;
   transform: translateY(-50%);
   background: none;
   border: none;
@@ -315,8 +374,6 @@ form .form-control {
   font-weight: 400;
 }
 
-
-
 .form-control .email-input.error,
 .form-control .password-input.error,
 .form-control .code-input.error,
@@ -330,7 +387,9 @@ form .form-control {
 .form-control .password-input:focus,
 .password-input:valid,
 .form-control .code-input:focus,
-.code-input:valid {
+.code-input:valid, 
+.form-control .re-password-input:focus,
+.re-password-input:valid{
   border: 1px solid #10a37f;
   outline: none;
 }
@@ -352,6 +411,14 @@ form .form-control {
 .form-control .password-input:focus + .password-label {
   font-size: 14px;
   top: 18px;
+  left: 10px;
+  color: #10a37f;
+  background-color: #fff;
+}
+
+.form-control .re-password-input:focus + .re-password-label {
+  font-size: 14px;
+  top: 0px;
   left: 10px;
   color: #10a37f;
   background-color: #fff;
@@ -385,13 +452,36 @@ form .form-control {
 .form-control .password-input.error + .password-label,
 .form-control .code-input.error + .code-label,
 .form-control .fName-input.error + .fName-label,
-.form-control .date-input.error + .date-label {
+.form-control .date-input.error + .date-label ,
+.form-control .re-password-input.error + .re-password-label{
   color: #d00e17;
 }
 
 .form-control .email-label {
   position: absolute;
   top: 26px;
+  left: 16px;
+  background-color: #fff;
+  color: #6f7780;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 8px;
+  max-width: 90%;
+  overflow: hidden;
+  pointer-events: none;
+  padding: 1px 6px;
+  text-overflow: ellipsis;
+  transform: translateY(-50%);
+  transform-origin: 0;
+  transition: transform 0.15s ease-in-out, top 0.15s ease-in-out,
+    padding 0.15s ease-in-out;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.form-control .re-password-label {
+  position: absolute;
+  top: 24px;
   left: 16px;
   background-color: #fff;
   color: #6f7780;
@@ -529,6 +619,12 @@ form .form-control {
   left: 10px;
 }
 
+.re-password-label.filled {
+  font-size: 14px;
+  top: 0px;
+  left: 10px;
+}
+
 .form-control .invalid-email-error-message {
   color: #d00e17;
   display: none;
@@ -549,8 +645,21 @@ form .form-control {
   margin: 4px 0 12px;
   font-size: 12px;
 }
+.form-control .invalid-code-error-message {
+  color: #d00e17;
+  display: none;
+  margin: 4px 0 12px;
+  font-size: 12px;
+}
 
-.form-control .invalid-fName-error-message, 
+.form-control .invalid-pwd-error-message {
+  color: #d00e17;
+  display: none;
+  margin: 4px 0 12px;
+  font-size: 12px;
+}
+
+.form-control .invalid-fName-error-message,
 .form-control .invalid-dob-error-message {
   color: #d00e17;
   display: none;
@@ -567,11 +676,12 @@ form .form-control {
   }
 }
 
+
 .form-control .invalid-password-error-message {
   position: relative;
   display: none;
   padding: 10px 16px;
-  border: 1px solid #c2c8d0;
+  border: 1px solid #c2c8d0 !important;
   margin-top: 10px;
   border-radius: 3px;
   text-align: left;
@@ -634,6 +744,9 @@ form .form-control {
 .form-control .invalid-credentials-error-message.visible {
   display: flex;
 }
+.form-control .invalid-pwd-error-message.visible {
+  display: flex;
+}
 
 #user-email {
   display: flex;
@@ -661,6 +774,33 @@ form .continue-btn {
   font-size: 16.3px;
   border-width: 0;
   cursor: pointer;
+}
+
+.container .resend-btn {
+  border: 1px solid #c2c8d0;
+  background: transparent;
+  color: #000;
+  padding: 16px 16px;
+  width: 338px;
+  border-radius: 6px;
+  margin-top: 2rem;
+  font-size: 16.5px;
+  cursor: pointer;
+}
+
+.resend-btn:hover {
+  background-color: #d3d6da;
+  transition: background-color .25s ease-in-out;
+}
+
+.container .success-email {
+  color: #10a37f;
+  width: 84px;
+  height: 84px;
+  background-image: url("../assets/download.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #code-generator-form .transparent-btn {

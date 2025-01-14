@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reset Password - Change</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Reset your password</h1>
+      <p
+        style="
+          max-width: 280px;
+          text-align: center;
+          font-size: 14px;
+          font-weight: 500;
+          margin-bottom: 10px;
+          line-height: 155%;
+        "
+      >
+        Enter a new password below to change your password.
+      </p>
+      <form id="reset-pwd-form">
+        <div class="form-control">
+          <input type="password" class="password-input" id="password-input" />
+          <label for="password-input" class="password-label"
+            >New password*</label
+          >
+          <button
+            type="button"
+            class="show-password-toggle"
+            aria-label="Show password"
+          ></button>
+        </div>
+        <div class="form-control">
+          <input
+            type="password"
+            class="re-password-input"
+            id="re-password-input"
+          />
+          <label for="re-password-input" class="re-password-label"
+            >Re-enter new password*</label
+          >
+          <button
+            type="button"
+            class="show-password-toggle"
+            aria-label="Show password"
+          ></button>
+          <div class="invalid-pwd-error-message">
+            <img
+              class="error-icon"
+              style="margin-right: 4px"
+              src="../assets/error-icon-BaFi8GTB.svg"
+            />
+          </div>
+          <div class="invalid-password-error-message">
+            <ul>
+              Your password must contain:
+              <li id="pwd-validation">At least 12 characters</li>
+            </ul>
+          </div>
+        </div>
+        <button type="submit" class="continue-btn" disabled>
+          Reset password
+        </button>
+      </form>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const rePwdLabel = document.querySelector(".re-password-label");
+        const pwdLabel = document.querySelector(".password-label");
+        const pwdInput = document.querySelector(".password-input");
+        const rePwdInput = document.querySelector(".re-password-input");
+        const button = document.querySelector(".continue-btn");
+        const errorMsg = document.querySelector(".invalid-pwd-error-message");
+        const pwdDefErrorMsg = document.querySelector(
+          ".invalid-password-error-message"
+        );
+        const form = document.getElementById("reset-pwd-form");
+        
+        function handleInput() {
+          const pwd = pwdInput.value.trim();
+          const rePwd = rePwdInput.value.trim();
+
+          if (pwd || rePwd) {
+            pwdLabel.classList.add("filled");
+            rePwdLabel.classList.add("filled");
+          } else {
+            pwdLabel.classList.remove("filled");
+            rePwdLabel.classList.remove("filled");  
+          }
+        }
+
+        // Attach event listeners
+        pwdInput.addEventListener("input", handleInput);
+        rePwdInput.addEventListener("input", handleInput);
+      });
+    </script>
+  </body>
+</html>

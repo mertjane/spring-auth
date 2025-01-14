@@ -29,6 +29,7 @@ public class EmailController {
     @Autowired
     private TemplateEngine templateEngine; // Inject Thymeleaf TemplateEngine
 
+    // Send an OTP to user's email address
     @GetMapping("/email-verification")
     public String sendTestEmail(@RequestParam String email) {
         // Fetch the user by email
@@ -53,9 +54,33 @@ public class EmailController {
         // Send the email
         String to = user.getEmail();
         String subject = "Your The Web code is " + otpCode;
-        //String body = String.valueOf(otpCode);
+        // String body = String.valueOf(otpCode);
         emailService.sendEmail(to, subject, htmlBody);
         return "Email sent successfully";
+    }
+
+    // Send a forgot password link to the user's
+    @GetMapping("/reset-password")
+    public String sendPwdResetLink(@RequestParam String email) {
+        UserModel user = authRepository.findByEmail(email);
+        if (user == null) {
+            return "User not found with email: " + email;
+        }
+
+        String link = "http://localhost:8080/forgot-email-success.html";
+
+        Context context = new Context();
+        context.setVariable("reset-pwd-link", link);
+
+        // Render the HTML template
+        String htmlBody = templateEngine.process("emails/forgot-pwd-email", context);
+
+        // Send the email
+        String to = user.getEmail();
+        String subject = "Change password for The Webb";
+
+        emailService.sendEmail(to, subject, htmlBody);
+        return "Email send successfully";
     }
 
 }

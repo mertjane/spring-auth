@@ -35,12 +35,17 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth.html", "/login.html", "/login-password.html", "/signupPwd.html", "/emailVerify.html",
+                        .requestMatchers("/auth.html", "/login.html", "/login-password.html", "/signupPwd.html",
+                                "/emailVerify.html",
+                                "/pwd-change.html",
                                 "/about-you.html",
+                                "/forgot-credentials.html",
+                                "/forgot-email-success.html",
                                 "/css/**", "/js/**", "/assets/**")
                         .permitAll()
                         .requestMatchers("/api/v1/authorize/**").permitAll()
                         .requestMatchers("/api/v1/authorize/signup").permitAll()
+                        .requestMatchers("/api/v1/authorize/reset-password/**").permitAll()
                         .requestMatchers("/api/v1/authorize/email-verification/**").permitAll()
                         .requestMatchers("/api/v1/authorize/update-user/**").permitAll()
 
@@ -52,7 +57,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 }
